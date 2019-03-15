@@ -1,0 +1,24 @@
+version: '3.6'
+services:
+  proxy:
+    image: nginx:1.14-alpine
+    container_name: 'proxy'
+    ports: 
+      - 1443:1443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./certs:/etc/ssl/certs:ro
+      - ./nginx/logs:/var/log/nginx
+    environment:
+      - VIRTUAL_HOST=test.ajgrande.com
+    depends_on:
+      - server
+  server:
+    build: .
+    image: ajgrande924/grpc-node-server
+    container_name: 'server'
+    ports: 
+      - 443:443
+    volumes:
+      - ./certs:/usr/src/app/certs:ro

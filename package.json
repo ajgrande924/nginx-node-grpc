@@ -1,0 +1,24 @@
+{
+  "name": "nginx-grpc",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:client": "node src/client.grpc.js",
+    "start:client:ssl": "node src/client.grpcs.js",
+    "test:server": "node src/server.js",
+    "test:server:ssl": "node src/server.js ssl",
+    "gen:certs": "./scripts/gen_certs.sh",
+    "clean": "rm -rf *.tar.gz certs/"
+  },
+  "author": "AJ Grande",
+  "license": "MIT",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.4.0",
+    "grpc": "^1.18.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "commander": "^2.19.0"
+  }
+}

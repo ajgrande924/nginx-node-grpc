@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package sample;
+
+service Test {
+  rpc sendReq (SingleRequest) returns (SingleReply) {}
+  rpc sendFileStr (SingleRequest) returns (stream StreamReply);
+}
+
+message SingleRequest {
+  string req = 1;
+}
+
+message SingleReply {
+  string res = 1;
+}
+
+message StreamReply {
+  bytes chunk = 1;
+}

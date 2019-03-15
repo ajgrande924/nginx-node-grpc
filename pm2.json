@@ -1,0 +1,22 @@
+[{
+  "name": "grpc-server",
+  "script": "src/grpc_server.js",
+  "instances": "1",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "env_production" : {
+    "NODE_ENV": "production"
+  }
+}, {
+  "name": "grpc-server-ssl",
+  "script": "src/grpc_server.js",
+  "args": "ssl",
+  "instances": "1",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "env_production" : {
+    "NODE_ENV": "production"
+  }
+}]
