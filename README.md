@@ -1,4 +1,5 @@
 # nginx-node-grpc
+> nginx proxy & grpc node server example w/ ssl
 
 ### setup
 
@@ -34,28 +35,21 @@ Options:
 ### examples
 
 ```sh
-# example: /sample.Test/sendReq
+# grpc proxy: /sample.Test/sendReq
 node ./bin/grpc_client.js -i \
   -p ./src/proto/sample.proto \
   -a localhost:80 \
   -s Test \
   -x ./bin/exec/sample_Test_sendReq.exec.js
 
-# example: /sample.Test/sendReq
+# grpc proxy: /sample.Test/sendFileStr
 node ./bin/grpc_client.js -i \
   -p ./src/proto/sample.proto \
-  -a 0.0.0.0:50051 \
-  -s Test \
-  -x ./bin/exec/sample_Test_sendReq.exec.js
-
-# example: /sample.Test/sendFileStr
-node ./bin/grpc_client.js -i \
-  -p ./src/proto/sample.proto \
-  -a 0.0.0.0:50051 \
+  -a localhost:80 \
   -s Test \
   -x ./bin/exec/sample_Test_sendFileStr.exec.js
 
-# server ssl example: /sample.Test/sendReq
+# grpc server ssl (mutual tls): /sample.Test/sendReq
 node ./bin/grpc_client.js \
   --root_cert ./certs/ca.crt \
   --private_key ./certs/client.key \
@@ -65,7 +59,7 @@ node ./bin/grpc_client.js \
   -s Test \
   -x ./bin/exec/sample_Test_sendReq.exec.js
 
-# proxy ssl example (mutual tls): /sample.Test/sendReq
+# grpc proxy ssl (mutual tls): /sample.Test/sendReq
 node ./bin/grpc_client.js \
   --root_cert ./certs/ca.crt \
   --private_key ./certs/client.key \
@@ -75,7 +69,7 @@ node ./bin/grpc_client.js \
   -s Test \
   -x ./bin/exec/sample_Test_sendReq.exec.js
 
-# proxy ssl example (normal tls): /sample.Test/sendReq
+# grpc proxy ssl (normal tls): /sample.Test/sendReq
 node ./bin/grpc_client.js \
   --root_cert ./certs/ca.crt \
   -p ./src/proto/sample.proto \
