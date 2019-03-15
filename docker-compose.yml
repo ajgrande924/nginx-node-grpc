@@ -3,7 +3,8 @@ services:
   proxy:
     image: nginx:1.14-alpine
     container_name: 'proxy'
-    ports: 
+    ports:
+      - 80:80
       - 1443:1443
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
@@ -18,7 +19,7 @@ services:
     build: .
     image: ajgrande924/grpc-node-server
     container_name: 'server'
-    ports: 
+    ports:
       - 443:443
     volumes:
       - ./certs:/usr/src/app/certs:ro
