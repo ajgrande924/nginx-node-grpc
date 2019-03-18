@@ -1,14 +1,12 @@
 {
-  "name": "nginx-grpc",
+  "name": "nginx-node-grpc",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "nginx proxy & grpc node server example w/ ssl",
+  "main": "bin/grpc_client.js",
   "scripts": {
-    "start:client": "node src/client.grpc.js",
-    "start:client:ssl": "node src/client.grpcs.js",
-    "test:server": "node src/server.js",
-    "test:server:ssl": "node src/server.js ssl",
     "gen:certs": "./scripts/gen_certs.sh",
+    "test:server": "node src/grpc_server.js",
+    "test:server:ssl": "node src/grpc_server.js ssl",
     "clean": "rm -rf *.tar.gz certs/"
   },
   "author": "AJ Grande",

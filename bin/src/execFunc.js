@@ -9,16 +9,20 @@ function printReply(logger, err, reply) {
   }
 }
 
-function streamReplyData(fileData, {chunk}) {
-  fileData.write(chunk);
-}
-
-function streamReplyEnd(fileData) {
-  fileData.end();
+function streamReply(fileData, evt) {
+  return function(payload) {
+    if (evt === 'file:data') {
+      const { chunk } = payload;
+      fileData.write(chunk);
+    } else if (evt === 'file:end') {
+      fileData.end();
+    } else {
+      // not implemented
+    }
+  };
 }
 
 module.exports = {
   printReply,
-  streamReplyData,
-  streamReplyEnd
+  streamReply
 };

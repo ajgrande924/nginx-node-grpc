@@ -9,7 +9,7 @@ const vm = require('vm');
 const Logger = require('../../src/logger');
 const logger = new Logger({ level: 'info' });
 
-const { printReply, streamReplyData, streamReplyEnd } = require('./execFunc');
+const { printReply, streamReply } = require('./execFunc');
 
 function createCredentials(options) { // grpc,fs,logger
   if (options.insecure) return grpc.credentials.createInsecure();
@@ -67,14 +67,14 @@ function createClient(args, options) {
 
   const client = new PROTO_INFO[service](address, creds);
 
-  let fileData = fs.createWriteStream('sample.tar.gz');
-
   const sandbox = { 
     grpc, 
-    client, 
+    client,
+    fs,
+    path,
+    process,
     printReply: printReply.bind(null, logger),
-    streamReplyData: streamReplyData.bind(null, fileData),
-    streamReplyEnd: streamReplyEnd.bind(null, fileData)
+    streamReply: streamReply.bind(null)
   };
 
   const script = new vm.Script(EXEC_STR);

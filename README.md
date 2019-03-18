@@ -6,8 +6,10 @@
 ```sh
 # install dependencies
 npm install
+
 # generate certificates using openssl
 npm run gen:certs
+
 # bring up nginx proxy on port 80 (grpc) & 1443 (grpcs)
 # bring up grpc server on port 50051 (grpc) & 443 (grpcs)
 docker-compose up -d # dkcu
