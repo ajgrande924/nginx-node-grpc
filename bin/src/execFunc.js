@@ -9,10 +9,10 @@ function printReply(logger, err, reply) {
   }
 }
 
-function streamReply(fileData, evt) {
+function streamReply(fileData, evt, cb) {
   return function(payload) {
     if (evt === 'file:data') {
-      const { chunk } = payload;
+      const chunk = cb(payload);
       fileData.write(chunk);
     } else if (evt === 'file:end') {
       fileData.end();
