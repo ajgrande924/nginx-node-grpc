@@ -1,17 +1,16 @@
 'use strict';
 
+const fs = require('fs');
+const vm = require('vm');
 const path = require('path');
 const grpc = require('grpc');
-const fs = require('fs');
 const protoLoader = require('@grpc/proto-loader');
-const vm = require('vm');
 
 const Logger = require('../../src/logger');
-const logger = new Logger({ level: 'info' });
 
 const { printReply, streamReply } = require('./execFunc');
 
-function createCredentials(options) { // grpc,fs,logger
+function createCredentials(options, { grpc, fs, logger }) { // grpc,fs,logger
   if (options.insecure) return grpc.credentials.createInsecure();
   if (!options.rootCert) return grpc.credentials.createSsl();
 
@@ -33,6 +32,8 @@ function createCredentials(options) { // grpc,fs,logger
 
 function createClient(args, options) {
   const { proto, service, address, exec } = args;
+
+  const logger = new Logger({ level: args.log_level });
 
   logger.log('info', `proto: ${proto}`);
   logger.log('info', `service: ${service}`);
@@ -63,7 +64,7 @@ function createClient(args, options) {
   // TODO: check if service exists in proto
   // TODO: check if address is valid
 
-  const creds = createCredentials(options);
+  const creds = createCredentials(options, { grpc, fs, logger });
 
   const client = new PROTO_INFO[service](address, creds);
 

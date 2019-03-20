@@ -27,7 +27,8 @@ Options:
   -a, --address <host:port>  the address of the service to connect to (required)
   -s, --service <name>       the name of the service to connect to (required)
   -x, --exec <path>          execute a script file and print the results (required)
-  -i, --insecure             use an insecure connection (default=false)
+  -i, --insecure             use an insecure connection (default: false)
+  -l, --log_level <level>    logger level [error|warn|info|verbose|debug|silly] (default: "info")
   --root_cert <path>         specify root certificate path for secure connections (optional)
   --private_key <path>       specify private key path for secure connections (optional)
   --cert_chain <path>        specify certificate chain path for secure connections (optional)
@@ -42,14 +43,14 @@ node ./bin/grpc_client.js -i \
   -p ./src/proto/sample.proto \
   -a localhost:80 \
   -s Test \
-  -x ./bin/exec/sample_Test_sendReq.exec.js
+  -x ./samples/exec/sample_Test_sendReq.exec.js
 
 # grpc proxy: /sample.Test/sendFileStr
 node ./bin/grpc_client.js -i \
   -p ./src/proto/sample.proto \
   -a localhost:80 \
   -s Test \
-  -x ./bin/exec/sample_Test_sendFileStr.exec.js
+  -x ./samples/exec/sample_Test_sendFileStr.exec.js
 
 # grpc server ssl (mutual tls): /sample.Test/sendReq
 node ./bin/grpc_client.js \
@@ -59,7 +60,7 @@ node ./bin/grpc_client.js \
   -p ./src/proto/sample.proto \
   -a localhost:443 \
   -s Test \
-  -x ./bin/exec/sample_Test_sendReq.exec.js
+  -x ./samples/exec/sample_Test_sendReq.exec.js
 
 # grpc proxy ssl (mutual tls): /sample.Test/sendReq
 node ./bin/grpc_client.js \
@@ -69,7 +70,7 @@ node ./bin/grpc_client.js \
   -p ./src/proto/sample.proto \
   -a localhost:1443 \
   -s Test \
-  -x ./bin/exec/sample_Test_sendReq.exec.js
+  -x ./samples/exec/sample_Test_sendReq.exec.js
 
 # grpc proxy ssl (normal tls): /sample.Test/sendReq
 node ./bin/grpc_client.js \
@@ -77,5 +78,5 @@ node ./bin/grpc_client.js \
   -p ./src/proto/sample.proto \
   -a localhost:1443 \
   -s Test \
-  -x ./bin/exec/sample_Test_sendReq.exec.js
+  -x ./samples/exec/sample_Test_sendReq.exec.js
 ```
