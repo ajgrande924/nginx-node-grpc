@@ -8,7 +8,7 @@ const protoLoader = require('@grpc/proto-loader');
 
 const Logger = require('../../src/logger');
 
-const { printReply, streamReply } = require('./execFunc');
+const { printReply, printStatus, streamReply } = require('./execFunc');
 
 function createCredentials(options, { grpc, fs, logger }) { // grpc,fs,logger
   if (options.insecure) return grpc.credentials.createInsecure();
@@ -75,7 +75,7 @@ function createClient(args, options) {
     path,
     process,
     printReply: printReply.bind(null, logger),
-    streamReply: streamReply.bind(null)
+    streamReply: streamReply.bind(null, logger)
   };
 
   const script = new vm.Script(EXEC_STR);

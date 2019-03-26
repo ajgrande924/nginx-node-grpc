@@ -9,15 +9,17 @@ function printReply(logger, err, reply) {
   }
 }
 
-function streamReply(fileData, evt, cb) {
+function streamReply(logger, evt, fileData, cb) {
   return function(payload) {
     if (evt === 'file:data') {
       const chunk = cb(payload);
       fileData.write(chunk);
     } else if (evt === 'file:end') {
       fileData.end();
+    } else if (evt === 'file:status') {
+      logger.log('debug', JSON.stringify(payload));
     } else {
-      // not implemented
+      logger.log('info', JSON.stringify(payload));
     }
   };
 }

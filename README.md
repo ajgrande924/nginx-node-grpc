@@ -17,6 +17,8 @@ docker-compose up -d # dkcu
 
 ### usage
 
+The grpc command line client is a flexible tool used to test grpc services. It is built using Node.js but can communicate with gRPC services written in any language. To use the tool, information about the request to the service need to be specified, options are defined below.
+
 ```sh
 # node bin/grpc_client.js -h
 Usage: grpc_client [options]
@@ -34,6 +36,12 @@ Options:
   --cert_chain <path>        specify certificate chain path for secure connections (optional)
   -h, --help                 output usage information
 ```
+
+The following globals are available in the exec script:
+
+  - fs, path, process, grpc
+  - printReply: callback used to print the response of an RPC call
+  - streamReply: callback used to print the response of a streaming RPC call
 
 ### examples
 
