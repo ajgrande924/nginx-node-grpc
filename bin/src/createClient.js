@@ -8,7 +8,7 @@ const protoLoader = require('@grpc/proto-loader');
 
 const Logger = require('../../src/logger');
 
-const { printReply, printStatus, streamReply } = require('./execFunc');
+const { printReply, streamReply } = require('./execFunc');
 
 function createCredentials(options, { grpc, fs, logger }) { // grpc,fs,logger
   if (options.insecure) return grpc.credentials.createInsecure();
